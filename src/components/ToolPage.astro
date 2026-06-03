@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ToolShell from './ToolShell.tsx';
+import Faq from './Faq.astro';
+import type { ToolContent } from '../content/tools';
+interface Props { tool: ToolContent; }
+const { tool } = Astro.props;
+---
+<BaseLayout title={tool.title} description={tool.description}>
+  <h1>{tool.title}</h1>
+  <p>{tool.intro}</p>
+  <ToolShell client:load format={tool.format} />
+  {tool.body.map((p) => (<p>{p}</p>))}
+  <Faq faq={tool.faq} />
+</BaseLayout>
