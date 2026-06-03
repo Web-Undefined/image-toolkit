@@ -1,0 +1,26 @@
+{
+  "name": "image-toolkit",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/preact": "^5.1.5",
+    "astro": "^6.4.4",
+    "fflate": "^0.8.3",
+    "libheif-js": "^1.19.8",
+    "pdf-lib": "^1.17.1",
+    "preact": "^10.29.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.60.0",
+    "vitest": "^4.1.8"
+  }
+}
