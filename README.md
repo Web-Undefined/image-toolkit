@@ -1,43 +1,22 @@
-# Astro Starter Kit: Minimal
+# HEIC Toolkit
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Fully client-side HEIC → JPG/PNG/PDF converter. No uploads.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Develop
+- `npm run dev` — dev server
+- `npm test` — unit + integration (Vitest)
+- `npm run e2e` — Playwright end-to-end
 
-## 🚀 Project Structure
+## Deploy (Cloudflare Pages)
+1. Push this repo to GitHub.
+2. In Cloudflare Pages: create project from the repo.
+3. Build command: `npm run build`; output dir: `dist`.
+4. Set `site` in `astro.config.mjs` and the domain to your real domain.
+5. (At AdSense approval) set the `PUBLIC_ADSENSE_CLIENT` env var and real slot IDs; add `public/ads.txt`.
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## Manual cross-browser checklist (run before launch)
+- [ ] Chrome (Windows): convert single + batch, download zip
+- [ ] Firefox: same
+- [ ] Safari (macOS/iOS): same — confirm conversion works
+- [ ] A corrupt/renamed file shows a per-file error without breaking the batch
+- [ ] A >50 MB file shows the size error
