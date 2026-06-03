@@ -1,17 +1,15 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title="HEIC Toolkit — Free Private HEIC Converters"
+  description="Convert iPhone HEIC photos to JPG, PNG, or PDF for free. 100% in your browser — your files are never uploaded."
+>
+  <h1>Free, private HEIC converters</h1>
+  <p>Convert the HEIC photos your iPhone takes into formats that open everywhere. Every tool runs entirely in your browser — your images are never uploaded to a server.</p>
+  <ul>
+    <li><a href="/heic-to-jpg">HEIC to JPG</a> — best for sharing and compatibility</li>
+    <li><a href="/heic-to-png">HEIC to PNG</a> — lossless quality</li>
+    <li><a href="/heic-to-pdf">HEIC to PDF</a> — turn photos into documents</li>
+  </ul>
+</BaseLayout>
