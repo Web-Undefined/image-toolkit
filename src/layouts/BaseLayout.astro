@@ -1,0 +1,36 @@
+---
+interface Props { title: string; description: string; canonical?: string; }
+const { title, description, canonical } = Astro.props;
+const site = 'https://REPLACE_WITH_DOMAIN'; // set at launch
+const url = canonical ?? new URL(Astro.url.pathname, site).href;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={url} />
+    <!-- AdSense loader is injected in Task 4.1 -->
+    <slot name="head" />
+  </head>
+  <body>
+    <header><a href="/">HEIC Toolkit</a></header>
+    <main><slot /></main>
+    <footer>
+      <nav>
+        <a href="/heic-to-jpg">HEIC→JPG</a> ·
+        <a href="/heic-to-png">HEIC→PNG</a> ·
+        <a href="/heic-to-pdf">HEIC→PDF</a> ·
+        <a href="/about">About</a> ·
+        <a href="/privacy">Privacy</a>
+      </nav>
+      <p>All conversion happens in your browser. Your files are never uploaded.</p>
+    </footer>
+  </body>
+</html>
