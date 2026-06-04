@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ToolShell from './ToolShell.tsx';
 import Faq from './Faq.astro';
 import AdSlot from './AdSlot.astro';
+import RelatedTools from './RelatedTools.astro';
 import type { ToolContent } from '../content/tools';
 interface Props { tool: ToolContent; }
 const { tool } = Astro.props;
@@ -60,8 +61,10 @@ const tabs = [
   </div>
 
   {/* FAQ */}
-  <div class="max-w-2xl mx-auto px-6 pb-16">
+  <div class="max-w-2xl mx-auto px-6 pb-8">
     <Faq faq={tool.faq} />
   </div>
+
+  <RelatedTools currentSlug={tool.slug} />
 
 </BaseLayout>
