@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'preact/hooks';
+import { useState, useCallback, useRef } from 'preact/hooks';
 import type { OutputFormat, BatchItem } from '../types';
 import { processInWorker } from '../lib/client';
 import { zipBlobs } from '../lib/zip';
@@ -9,6 +9,7 @@ const newId = () => `f${++counter}`;
 export default function ToolShell({ format }: { format: OutputFormat }) {
   const [items, setItems] = useState<BatchItem[]>([]);
   const [dragging, setDragging] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const update = (id: string, patch: Partial<BatchItem>) =>
     setItems((prev) => prev.map((it) => (it.id === id ? { ...it, ...patch } : it)));
@@ -67,7 +68,7 @@ export default function ToolShell({ format }: { format: OutputFormat }) {
         onDragLeave={onDragLeave}
         onDrop={onDrop}
         data-testid="dropzone"
-        onClick={() => (document.querySelector('[data-testid="file-input"]') as HTMLInputElement)?.click()}
+        onClick={() => fileInputRef.current?.click()}
       >
         <div class="w-12 h-12 mx-auto mb-4 bg-violet-500/20 rounded-xl flex items-center justify-center text-2xl">
           📷
@@ -79,16 +80,17 @@ export default function ToolShell({ format }: { format: OutputFormat }) {
           class="bg-gradient-to-br from-violet-600 to-purple-600 text-white text-sm font-semibold px-5 py-2 rounded-lg btn-glow hover:from-violet-500 hover:to-purple-500 transition-all"
           onClick={(e) => {
             e.stopPropagation();
-            (document.querySelector('[data-testid="file-input"]') as HTMLInputElement)?.click();
+            fileInputRef.current?.click();
           }}
         >
           Choose files
         </button>
         <input
+          ref={fileInputRef}
           type="file"
           accept=".heic,.heif,image/heic,image/heif"
           multiple
-          class="hidden"
+          class="sr-only"
           data-testid="file-input"
           onChange={(e) => {
             const input = e.currentTarget as HTMLInputElement;
