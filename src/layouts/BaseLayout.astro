@@ -2,7 +2,7 @@
 import '../styles/global.css';
 interface Props { title: string; description: string; canonical?: string; }
 const { title, description, canonical } = Astro.props;
-const site = 'https://REPLACE_WITH_DOMAIN';
+const site = 'https://freeheicconverter.com';
 const url = canonical ?? new URL(Astro.url.pathname, site).href;
 ---
 <!doctype html>

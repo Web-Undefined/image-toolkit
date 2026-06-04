@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: 'https://REPLACE_WITH_DOMAIN',
+  site: 'https://freeheicconverter.com',
   integrations: [preact(), sitemap()],
   vite: {
     plugins: [tailwindcss()],
