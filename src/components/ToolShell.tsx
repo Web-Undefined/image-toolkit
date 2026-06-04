@@ -75,8 +75,12 @@ export default function ToolShell({ format }: { format: OutputFormat }) {
         <p class="text-slate-200 font-semibold text-sm mb-1">Drag &amp; drop your HEIC files</p>
         <p class="text-slate-500 text-xs mb-4">Files are converted entirely on your device — never uploaded</p>
         <button
+          type="button"
           class="bg-gradient-to-br from-violet-600 to-purple-600 text-white text-sm font-semibold px-5 py-2 rounded-lg btn-glow hover:from-violet-500 hover:to-purple-500 transition-all"
-          onClick={(e) => e.stopPropagation()}
+          onClick={(e) => {
+            e.stopPropagation();
+            (document.querySelector('[data-testid="file-input"]') as HTMLInputElement)?.click();
+          }}
         >
           Choose files
         </button>
@@ -124,6 +128,7 @@ export default function ToolShell({ format }: { format: OutputFormat }) {
               )}
               {item.status === 'done' && (
                 <button
+                  type="button"
                   data-testid="download"
                   onClick={() => download(item)}
                   class="flex-shrink-0 text-xs font-semibold text-violet-300 border border-violet-500/40 bg-violet-500/10 px-3 py-1.5 rounded-lg hover:bg-violet-500/20 transition-colors"
@@ -139,6 +144,7 @@ export default function ToolShell({ format }: { format: OutputFormat }) {
       {/* Download all */}
       {doneCount > 1 && (
         <button
+          type="button"
           data-testid="download-all"
           onClick={downloadAll}
           class="w-full text-sm font-semibold text-violet-300 border border-violet-500/35 bg-violet-500/10 py-2.5 rounded-xl hover:bg-violet-500/20 transition-colors"

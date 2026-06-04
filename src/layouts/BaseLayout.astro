@@ -1,9 +1,9 @@
 ---
+import '../styles/global.css';
 interface Props { title: string; description: string; canonical?: string; }
 const { title, description, canonical } = Astro.props;
 const site = 'https://REPLACE_WITH_DOMAIN';
 const url = canonical ?? new URL(Astro.url.pathname, site).href;
-import '../styles/global.css';
 ---
 <!doctype html>
 <html lang="en">
@@ -39,13 +39,13 @@ import '../styles/global.css';
     </main>
     <footer class="border-t border-[--border-subtle] px-6 py-5 flex flex-wrap items-center justify-between gap-3">
       <nav class="flex flex-wrap gap-4">
-        <a href="/heic-to-jpg" class="text-xs text-slate-500 hover:text-violet-400 transition-colors">HEIC→JPG</a>
-        <a href="/heic-to-png" class="text-xs text-slate-500 hover:text-violet-400 transition-colors">HEIC→PNG</a>
-        <a href="/heic-to-pdf" class="text-xs text-slate-500 hover:text-violet-400 transition-colors">HEIC→PDF</a>
-        <a href="/about" class="text-xs text-slate-500 hover:text-violet-400 transition-colors">About</a>
-        <a href="/privacy" class="text-xs text-slate-500 hover:text-violet-400 transition-colors">Privacy</a>
+        <a href="/heic-to-jpg" class="text-xs text-slate-400 hover:text-violet-400 transition-colors">HEIC→JPG</a>
+        <a href="/heic-to-png" class="text-xs text-slate-400 hover:text-violet-400 transition-colors">HEIC→PNG</a>
+        <a href="/heic-to-pdf" class="text-xs text-slate-400 hover:text-violet-400 transition-colors">HEIC→PDF</a>
+        <a href="/about" class="text-xs text-slate-400 hover:text-violet-400 transition-colors">About</a>
+        <a href="/privacy" class="text-xs text-slate-400 hover:text-violet-400 transition-colors">Privacy</a>
       </nav>
-      <p class="text-xs text-slate-600">All conversion happens in your browser. Your files are never uploaded.</p>
+      <p class="text-xs text-slate-400">All conversion happens in your browser. Your files are never uploaded.</p>
     </footer>
   </body>
 </html>
