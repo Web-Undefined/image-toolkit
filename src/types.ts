@@ -17,3 +17,11 @@ export interface BatchItem {
   resultName?: string;
   error?: string;
 }
+
+export interface CompressResult {
+  blob: Blob;
+  name: string;
+  inputSize: number;   // bytes
+  outputSize: number;  // bytes — never greater than inputSize
+  alreadyOptimized: boolean;
+}
