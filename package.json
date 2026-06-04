@@ -21,7 +21,8 @@
     "fflate": "^0.8.3",
     "libheif-js": "^1.19.8",
     "pdf-lib": "^1.17.1",
-    "preact": "^10.29.2"
+    "preact": "^10.29.2",
+    "upng-js": "^2.1.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
