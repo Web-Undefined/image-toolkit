@@ -63,3 +63,21 @@ export const TOOLS: Record<string, ToolContent> = {
     ],
   },
 };
+
+export const COMPRESS_CONTENT = {
+  slug: 'compress-image',
+  title: 'Compress Image — Free, Private, In Your Browser',
+  description: 'Compress JPG, PNG, WebP, and HEIC images to shrink file size without uploading. 100% free, runs entirely in your browser.',
+  intro: 'Reduce the file size of your JPG, PNG, WebP, and HEIC images right in your browser. Drag your photos in, pick a quality level, and download smaller files — nothing is ever uploaded to a server.',
+  body: [
+    'Drag your images into the box above (or tap to choose them). Each image is re-compressed on your own device and offered for download, with the before-and-after size shown. Compress many at once and download them together as a zip.',
+    'JPG and WebP images are re-encoded at your chosen quality; PNG images are shrunk by reducing their color palette (the same technique tools like TinyPNG use); HEIC images are compressed and saved as JPG, since browsers cannot write HEIC. Lower the quality slider for smaller files, raise it for higher fidelity.',
+    'Because everything runs locally using WebAssembly and your browser, the tool works offline once loaded and none of your images are ever sent anywhere — safe for personal and sensitive photos.',
+  ],
+  faq: [
+    { q: 'Are my images uploaded anywhere?', a: 'No. Compression happens entirely in your browser. Your files never leave your device.' },
+    { q: 'Which formats can I compress?', a: 'JPG, PNG, WebP, and HEIC. HEIC images are saved as compressed JPG because browsers cannot write the HEIC format.' },
+    { q: 'Why did my PNG only shrink a little?', a: 'PNG is lossless, so we shrink it by reducing the color palette. Photos with many colors compress more; simple graphics that are already small may change little.' },
+    { q: 'What if compression would make the file bigger?', a: 'We never hand back a larger file. If re-compressing would not help, the original is kept and the row is marked "already optimized".' },
+  ],
+};
