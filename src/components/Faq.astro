@@ -12,9 +12,16 @@ const jsonLd = {
 };
 ---
 <section aria-labelledby="faq-heading">
-  <h2 id="faq-heading">Frequently asked questions</h2>
+  <h2 id="faq-heading" class="text-sm font-bold text-violet-400 uppercase tracking-wider mb-4">
+    Frequently asked questions
+  </h2>
   <dl>
-    {faq.map((f) => (<><dt>{f.q}</dt><dd>{f.a}</dd></>))}
+    {faq.map((f) => (
+      <div class="border-t border-[--border-subtle] py-4">
+        <dt class="text-sm font-semibold text-slate-200 mb-1">{f.q}</dt>
+        <dd class="text-sm text-slate-500 leading-relaxed">{f.a}</dd>
+      </div>
+    ))}
   </dl>
 </section>
 <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
