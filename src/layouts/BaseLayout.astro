@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { TOOL_REGISTRY } from '../content/tool-registry';
 interface Props { title: string; description: string; canonical?: string; }
 const { title, description, canonical } = Astro.props;
 const site = 'https://freeheicconverter.com';
@@ -22,8 +23,18 @@ const url = canonical ?? new URL(Astro.url.pathname, site).href;
   </head>
   <body>
     <header class="sticky top-0 z-50 flex items-center justify-between px-6 py-4 border-b border-[--border-subtle] bg-[--bg-base]/95 backdrop-blur-sm">
-      <a href="/" class="gradient-text font-bold text-base tracking-tight">⬡ HEIC Toolkit</a>
-      <nav class="flex gap-5">
+      <a href="/" class="gradient-text font-bold text-base tracking-tight">⬡ Image Toolkit</a>
+      <nav class="flex gap-5 items-center">
+        <details class="relative group">
+          <summary class="list-none cursor-pointer text-sm text-slate-400 hover:text-violet-400 transition-colors select-none">All Tools ▾</summary>
+          <div class="absolute right-0 mt-2 w-56 bg-[--bg-base] border border-[--border-subtle] rounded-xl p-2 shadow-xl z-50">
+            {TOOL_REGISTRY.map((tool) => (
+              <a href={tool.href} class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-slate-300 hover:bg-[--bg-surface-hover] hover:text-violet-300 transition-colors no-underline">
+                <span>{tool.icon}</span><span>{tool.name}</span>
+              </a>
+            ))}
+          </div>
+        </details>
         <a href="/about" class="text-sm text-slate-400 hover:text-violet-400 transition-colors">About</a>
         <a href="/privacy" class="text-sm text-slate-400 hover:text-violet-400 transition-colors">Privacy</a>
       </nav>
