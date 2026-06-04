@@ -1,40 +1,19 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-
-const tools = [
-  {
-    href: '/heic-to-jpg',
-    icon: '🖼',
-    title: 'HEIC to JPG',
-    description: 'Best compatibility — opens everywhere. Ideal for sharing and uploading.',
-  },
-  {
-    href: '/heic-to-png',
-    icon: '🎨',
-    title: 'HEIC to PNG',
-    description: 'Lossless quality with transparency support. Great for editing.',
-  },
-  {
-    href: '/heic-to-pdf',
-    icon: '📄',
-    title: 'HEIC to PDF',
-    description: 'Turn photos into documents for printing, emailing, or submitting.',
-  },
-];
+import { TOOL_REGISTRY } from '../content/tool-registry';
 ---
 <BaseLayout
-  title="HEIC Toolkit — Free Private HEIC Converters"
-  description="Convert iPhone HEIC photos to JPG, PNG, or PDF for free. 100% in your browser — your files are never uploaded."
+  title="Image Toolkit — Free Private Image Tools"
+  description="Compress images and convert HEIC photos to JPG, PNG, or PDF for free. 100% in your browser — your files are never uploaded."
 >
   {/* Hero */}
   <div class="relative text-center px-6 pt-16 pb-10 overflow-hidden">
     <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,var(--purple-glow),transparent)] pointer-events-none" />
     <h1 class="relative gradient-text text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight mb-4">
-      Free, private<br />HEIC converters
+      Free, private<br />image tools
     </h1>
     <p class="relative text-slate-400 text-base max-w-md mx-auto leading-relaxed mb-4">
-      Convert the HEIC photos your iPhone takes into formats that open everywhere.
-      Every tool runs entirely in your browser — your files are never uploaded.
+      Compress and convert your images right in your browser. Every tool runs entirely on your device — your files are never uploaded.
     </p>
     <span class="inline-flex items-center gap-1.5 bg-violet-500/15 border border-violet-500/30 text-violet-300 text-sm px-4 py-1.5 rounded-full">
       🔒 No upload · No account · No cost
@@ -43,23 +22,18 @@ const tools = [
 
   {/* Tool cards */}
   <div class="max-w-3xl mx-auto px-6 pb-20 grid grid-cols-1 sm:grid-cols-3 gap-4">
-    {tools.map((tool) => (
+    {TOOL_REGISTRY.map((tool) => (
       <a
         href={tool.href}
         class="group block bg-[--bg-surface] border border-[--border-subtle] rounded-2xl p-6
-               hover:border-violet-500/40 hover:bg-[--bg-surface-hover] transition-all duration-200
-               no-underline"
+               hover:border-violet-500/40 hover:bg-[--bg-surface-hover] transition-all duration-200 no-underline"
       >
         <div class="w-10 h-10 bg-violet-500/20 rounded-xl flex items-center justify-center text-xl mb-4">
           {tool.icon}
         </div>
-        <h2 class="text-base font-bold text-slate-200 mb-2 group-hover:text-violet-300 transition-colors">
-          {tool.title}
-        </h2>
-        <p class="text-sm text-slate-500 leading-relaxed">{tool.description}</p>
-        <span class="inline-block mt-4 text-xs font-semibold text-violet-400 group-hover:text-violet-300">
-          Convert now →
-        </span>
+        <h2 class="text-base font-bold text-slate-200 mb-2 group-hover:text-violet-300 transition-colors">{tool.name}</h2>
+        <p class="text-sm text-slate-500 leading-relaxed">{tool.blurb}</p>
+        <span class="inline-block mt-4 text-xs font-semibold text-violet-400 group-hover:text-violet-300">Open tool →</span>
       </a>
     ))}
   </div>
