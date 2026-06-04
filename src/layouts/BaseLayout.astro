@@ -17,13 +17,7 @@ const url = canonical ?? new URL(Astro.url.pathname, site).href;
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={url} />
-    {import.meta.env.PUBLIC_ADSENSE_CLIENT && (
-      <script
-        async
-        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${import.meta.env.PUBLIC_ADSENSE_CLIENT}`}
-        crossorigin="anonymous"
-      />
-    )}
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2907220168028289" crossorigin="anonymous"></script>
     <slot name="head" />
   </head>
   <body>
