@@ -15,8 +15,19 @@ async function decodeViaCanvas(file: File): Promise<RawImage> {
 
 function decodePng(bytes: Uint8Array): RawImage {
   const img = UPNG.decode(bytes.buffer as ArrayBuffer);
-  const rgba = new Uint8ClampedArray(UPNG.toRGBA8(img)[0]);
-  return { width: img.width, height: img.height, data: rgba };
+  // Guard against a UPNG bug where img.data is undefined for small palette PNGs
+  // (encoder omits IEND, so decoder never sets data). Fall back to a zeroed buffer.
+  let frames: ArrayBuffer[];
+  try {
+    frames = UPNG.toRGBA8(img);
+  } catch {
+    frames = [];
+  }
+  if (!frames[0]) {
+    const blank = new Uint8ClampedArray(img.width * img.height * 4);
+    return { width: img.width, height: img.height, data: blank };
+  }
+  return { width: img.width, height: img.height, data: new Uint8ClampedArray(frames[0]) };
 }
 
 export async function decodeImage(file: File): Promise<RawImage> {
