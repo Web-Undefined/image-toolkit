@@ -19,6 +19,14 @@ const url = canonical ?? new URL(Astro.url.pathname, site).href;
     <meta property="og:type" content="website" />
     <meta property="og:url" content={url} />
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2907220168028289" crossorigin="anonymous"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-73VX3DXFXM"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-73VX3DXFXM');
+    </script>
     <slot name="head" />
   </head>
   <body>
@@ -37,6 +45,7 @@ const url = canonical ?? new URL(Astro.url.pathname, site).href;
         </details>
         <a href="/about" class="text-sm text-slate-400 hover:text-violet-400 transition-colors">About</a>
         <a href="/privacy" class="text-sm text-slate-400 hover:text-violet-400 transition-colors">Privacy</a>
+        <a href="/contact" class="text-sm text-slate-400 hover:text-violet-400 transition-colors">Contact</a>
       </nav>
     </header>
     <main>
@@ -49,6 +58,7 @@ const url = canonical ?? new URL(Astro.url.pathname, site).href;
         <a href="/heic-to-pdf" class="text-xs text-slate-400 hover:text-violet-400 transition-colors">HEIC→PDF</a>
         <a href="/about" class="text-xs text-slate-400 hover:text-violet-400 transition-colors">About</a>
         <a href="/privacy" class="text-xs text-slate-400 hover:text-violet-400 transition-colors">Privacy</a>
+        <a href="/contact" class="text-xs text-slate-400 hover:text-violet-400 transition-colors">Contact</a>
       </nav>
       <p class="text-xs text-slate-400">All conversion happens in your browser. Your files are never uploaded.</p>
     </footer>
