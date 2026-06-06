@@ -5,10 +5,13 @@ import { decodeHeicBuffer } from './decode';
 import { ENCODERS } from './transforms';
 import { processFile } from './batch';
 import { compress } from './compress';
+import { resize } from './resize';
+import type { ResizeOpts } from './resize-dimensions';
 
 export type WorkerRequest =
   | { id: string; op: 'convert'; file: File; format: OutputFormat }
-  | { id: string; op: 'compress'; file: File; quality: number };
+  | { id: string; op: 'compress'; file: File; quality: number }
+  | { id: string; op: 'resize'; file: File; opts: ResizeOpts };
 
 export interface WorkerResponse {
   id: string;
@@ -18,6 +21,10 @@ export interface WorkerResponse {
   inputSize?: number;
   outputSize?: number;
   alreadyOptimized?: boolean;
+  inputW?: number;
+  inputH?: number;
+  outputW?: number;
+  outputH?: number;
   error?: string;
 }
 
@@ -32,7 +39,7 @@ self.onmessage = async (e: MessageEvent<WorkerRequest>) => {
         encoders: ENCODERS,
       });
       (self as unknown as Worker).postMessage({ id: req.id, ok: true, blob, name } as WorkerResponse);
-    } else {
+    } else if (req.op === 'compress') {
       const r = await compress(req.file, { quality: req.quality });
       (self as unknown as Worker).postMessage({
         id: req.id,
@@ -42,6 +49,18 @@ self.onmessage = async (e: MessageEvent<WorkerRequest>) => {
         inputSize: r.inputSize,
         outputSize: r.outputSize,
         alreadyOptimized: r.alreadyOptimized,
+      } as WorkerResponse);
+    } else {
+      const r = await resize(req.file, req.opts);
+      (self as unknown as Worker).postMessage({
+        id: req.id,
+        ok: true,
+        blob: r.blob,
+        name: r.name,
+        inputW: r.inputW,
+        inputH: r.inputH,
+        outputW: r.outputW,
+        outputH: r.outputH,
       } as WorkerResponse);
     }
   } catch (err) {
