@@ -11,6 +11,7 @@ export const TOOL_REGISTRY: ToolEntry[] = [
   { slug: 'heic-to-jpg', href: '/heic-to-jpg', name: 'HEIC to JPG', shortName: 'HEIC→JPG', icon: '🖼', blurb: 'Convert iPhone HEIC photos to JPG.' },
   { slug: 'heic-to-png', href: '/heic-to-png', name: 'HEIC to PNG', shortName: 'HEIC→PNG', icon: '🎨', blurb: 'Convert HEIC to lossless PNG.' },
   { slug: 'heic-to-pdf', href: '/heic-to-pdf', name: 'HEIC to PDF', shortName: 'HEIC→PDF', icon: '📄', blurb: 'Turn HEIC photos into PDF documents.' },
+  { slug: 'resize-image', href: '/resize-image', name: 'Resize Image', shortName: 'Resize', icon: '📐', blurb: 'Change image dimensions — JPG, PNG, WebP & HEIC.' },
   { slug: 'compress-image', href: '/compress-image', name: 'Compress Image', shortName: 'Compress', icon: '🗜', blurb: 'Shrink JPG, PNG, WebP & HEIC file sizes.' },
 ];
 

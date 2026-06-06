@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ResizeShell from '../components/ResizeShell.tsx';
+import Faq from '../components/Faq.astro';
+import RelatedTools from '../components/RelatedTools.astro';
+import AdSlot from '../components/AdSlot.astro';
+import { RESIZE_CONTENT as c } from '../content/tools';
+---
+<BaseLayout title={c.title} description={c.description}>
+
+  {/* Hero */}
+  <div class="relative text-center px-6 pt-12 pb-8 overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,var(--purple-glow),transparent)] pointer-events-none" />
+    <h1 class="relative gradient-text text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight mb-3">{c.title}</h1>
+    <p class="relative text-slate-400 text-sm max-w-md mx-auto leading-relaxed mb-3">{c.intro}</p>
+    <span class="inline-flex items-center gap-1.5 bg-violet-500/15 border border-violet-500/30 text-violet-300 text-xs px-3 py-1 rounded-full">
+      🔒 Files never leave your device
+    </span>
+  </div>
+
+  {/* Tool */}
+  <div class="max-w-2xl mx-auto px-6 mb-8">
+    <AdSlot adSlot="0000000001" />
+    <ResizeShell client:load />
+  </div>
+
+  {/* SEO body copy */}
+  <div class="max-w-2xl mx-auto px-6 mb-8 space-y-3">
+    {c.body.map((p) => (<p class="text-slate-500 text-sm leading-relaxed">{p}</p>))}
+    <AdSlot adSlot="0000000002" />
+  </div>
+
+  {/* FAQ */}
+  <div class="max-w-2xl mx-auto px-6 pb-8">
+    <Faq faq={c.faq} />
+  </div>
+
+  <RelatedTools currentSlug="resize-image" />
+
+</BaseLayout>

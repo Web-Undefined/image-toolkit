@@ -81,3 +81,21 @@ export const COMPRESS_CONTENT = {
     { q: 'What if compression would make the file bigger?', a: 'We never hand back a larger file. If re-compressing would not help, the original is kept and the row is marked "already optimized".' },
   ],
 };
+
+export const RESIZE_CONTENT = {
+  slug: 'resize-image',
+  title: 'Resize Image — Free, Private, In Your Browser',
+  description: 'Resize JPG, PNG, WebP, and HEIC images to exact pixel dimensions without uploading. 100% free, runs entirely in your browser.',
+  intro: 'Change the width and height of your JPG, PNG, WebP, and HEIC images right in your browser. Set a target size, keep the aspect ratio locked or free, and download — nothing is ever uploaded to a server.',
+  body: [
+    'Drag your images into the box above (or tap to choose them). Enter a width or height in pixels; with aspect ratio locked, each image keeps its proportions, so a whole batch can be resized to the same width at once. Turn the lock off to set an exact width and height.',
+    'Each resized image shows its old and new dimensions and is offered for download. Resize many at once and download them together as a zip. HEIC images are saved as JPG, since browsers cannot write the HEIC format.',
+    'Because everything runs locally in your browser, the tool works offline once loaded and none of your images are ever sent anywhere — safe for personal and sensitive photos.',
+  ],
+  faq: [
+    { q: 'Are my images uploaded anywhere?', a: 'No. Resizing happens entirely in your browser. Your files never leave your device.' },
+    { q: 'Which formats can I resize?', a: 'JPG, PNG, WebP, and HEIC. HEIC images are saved as JPG because browsers cannot write the HEIC format.' },
+    { q: 'How do I keep the aspect ratio?', a: 'Leave "Lock aspect ratio" on and set just one dimension — the other is calculated automatically so the image is not stretched.' },
+    { q: 'Can I make an image larger?', a: 'Yes. You can enlarge as well as shrink, though enlarging cannot add detail that was not in the original.' },
+  ],
+};
