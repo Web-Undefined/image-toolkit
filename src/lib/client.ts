@@ -79,3 +79,15 @@ export function resizeInWorker(id: string, file: File, opts: ResizeOpts): Promis
     };
   });
 }
+
+export interface RemoveBgOutcome {
+  blob: Blob;
+  name: string;
+}
+
+export function removeBackgroundInWorker(id: string, file: File): Promise<RemoveBgOutcome> {
+  return call<RemoveBgOutcome>({ id, op: 'remove-bg', file }, (r) => {
+    if (!r.blob || !r.name) throw new Error(r.error ?? 'Background removal failed.');
+    return { blob: r.blob, name: r.name };
+  });
+}

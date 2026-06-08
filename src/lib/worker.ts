@@ -11,7 +11,8 @@ import type { ResizeOpts } from './resize-dimensions';
 export type WorkerRequest =
   | { id: string; op: 'convert'; file: File; format: OutputFormat }
   | { id: string; op: 'compress'; file: File; quality: number }
-  | { id: string; op: 'resize'; file: File; opts: ResizeOpts };
+  | { id: string; op: 'resize'; file: File; opts: ResizeOpts }
+  | { id: string; op: 'remove-bg'; file: File };
 
 export interface WorkerResponse {
   id: string;
@@ -50,7 +51,7 @@ self.onmessage = async (e: MessageEvent<WorkerRequest>) => {
         outputSize: r.outputSize,
         alreadyOptimized: r.alreadyOptimized,
       } as WorkerResponse);
-    } else {
+    } else if (req.op === 'resize') {
       const r = await resize(req.file, req.opts);
       (self as unknown as Worker).postMessage({
         id: req.id,
@@ -61,6 +62,14 @@ self.onmessage = async (e: MessageEvent<WorkerRequest>) => {
         inputH: r.inputH,
         outputW: r.outputW,
         outputH: r.outputH,
+      } as WorkerResponse);
+    } else {
+      // Dynamically import so onnxruntime-web is only loaded on the remove-bg route,
+      // never bundled into the shared worker that the other tools use.
+      const { removeBackground } = await import('./remove-background');
+      const r = await removeBackground(req.file);
+      (self as unknown as Worker).postMessage({
+        id: req.id, ok: true, blob: r.blob, name: r.name,
       } as WorkerResponse);
     }
   } catch (err) {
