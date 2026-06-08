@@ -1,5 +1,11 @@
 // Lazily loads onnxruntime-web and the u2netp session. The import() keeps
 // onnxruntime-web out of the shared worker bundle until the first removal runs.
+//
+// We import the '/wasm' subpath (ort.wasm.bundle.min.mjs) rather than the
+// default entry. The default build probes for JSEP/WebGPU at startup and
+// dynamically imports ort-wasm-simd-threaded.jsep.mjs; if that file is
+// missing it fails with "no available backend" instead of falling back to
+// plain WASM. The '/wasm' build is WASM-only and skips that probe entirely.
 import { MODEL_URL, ORT_WASM_PATH, INPUT_SIZE } from './segment-constants';
 
 // onnxruntime-web is loaded dynamically; its types aren't imported statically.
@@ -8,7 +14,7 @@ let ortNs: any = null;
 let sessionPromise: Promise<any> | null = null;
 
 async function load(): Promise<any> {
-  const ort = await import('onnxruntime-web');
+  const ort = await import('onnxruntime-web/wasm');
   ort.env.wasm.wasmPaths = ORT_WASM_PATH;
   ort.env.wasm.numThreads = 1; // single-threaded → no cross-origin-isolation headers needed
   ortNs = ort;
