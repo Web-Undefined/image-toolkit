@@ -1,0 +1,3 @@
+This product includes the u2netp model from the U^2-Net project
+(https://github.com/xuebinqin/U-2-Net), licensed under the Apache License 2.0.
+A copy of the Apache 2.0 license is available at https://www.apache.org/licenses/LICENSE-2.0
