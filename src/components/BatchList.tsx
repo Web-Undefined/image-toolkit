@@ -7,6 +7,7 @@ export interface BatchRow {
   resultName?: string;
   error?: string;
   meta?: string;        // optional extra line e.g. "2.4 MB → 740 KB · 69% smaller"
+  previewUrl?: string;  // optional result thumbnail (object URL), shown on a checkerboard
   onDownload?: () => void;
 }
 
@@ -31,7 +32,16 @@ export default function BatchList({ rows, onDownloadAll, downloadAllLabel }: Pro
                 row.status === 'error' ? 'bg-[--bg-surface] border-red-500/30' :
                 'bg-[--bg-surface] border-[--border-subtle]'}`}
           >
-            <div class="w-8 h-8 rounded-lg bg-violet-500/15 flex items-center justify-center text-sm flex-shrink-0">🖼</div>
+            {row.previewUrl ? (
+              <div
+                class="w-12 h-12 rounded-lg flex-shrink-0 overflow-hidden border border-[--border-subtle]"
+                style="background-image:linear-gradient(45deg,#334155 25%,transparent 25%,transparent 75%,#334155 75%),linear-gradient(45deg,#334155 25%,transparent 25%,transparent 75%,#334155 75%);background-size:10px 10px;background-position:0 0,5px 5px;background-color:#1e293b"
+              >
+                <img src={row.previewUrl} alt="" data-testid="preview" class="w-full h-full object-contain" />
+              </div>
+            ) : (
+              <div class="w-8 h-8 rounded-lg bg-violet-500/15 flex items-center justify-center text-sm flex-shrink-0">🖼</div>
+            )}
             <div class="flex-1 min-w-0">
               <p class="text-sm font-medium text-slate-200 truncate">{row.fileName}</p>
               {row.status === 'processing' && (
