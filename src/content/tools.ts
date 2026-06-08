@@ -99,3 +99,21 @@ export const RESIZE_CONTENT = {
     { q: 'Can I make an image larger?', a: 'Yes. You can enlarge as well as shrink, though enlarging cannot add detail that was not in the original.' },
   ],
 };
+
+export const REMOVE_BG_CONTENT = {
+  slug: 'remove-background',
+  title: 'Remove Image Background — Free, Private, In Your Browser',
+  description: 'Remove the background from any image and download a transparent PNG — free, no upload. Runs entirely in your browser, so your photos never leave your device.',
+  intro: 'Erase the background from your JPG, PNG, WebP, and HEIC images right in your browser and get a clean transparent PNG. 100% free, no account, and nothing is ever uploaded to a server.',
+  body: [
+    'Drag your images into the box above (or tap to choose them). Each image is processed on your own device and shown with a checkerboard preview so you can see the cut-out before downloading. Remove the background from many at once and download them together as a zip.',
+    'The first image loads a small one-time AI model (about 5 MB), so it takes a few seconds; after that the rest are quick. Results are saved as transparent PNGs and work well for people, products, and objects.',
+    'Because everything runs locally in your browser — even the AI model is served from this site, not a third party — none of your images are ever sent anywhere. That makes it safe for personal and sensitive photos, and it works offline once loaded.',
+  ],
+  faq: [
+    { q: 'Are my images uploaded anywhere?', a: 'No. Background removal runs entirely in your browser, and even the AI model is served from this site rather than a third party. Your files never leave your device.' },
+    { q: 'Why is the first image slower?', a: 'The first image downloads a small one-time model (about 5 MB) and starts it up. Your browser caches it, so every image after that is much faster.' },
+    { q: 'What formats can I use, and what do I get back?', a: 'You can drop in JPG, PNG, WebP, and HEIC images. The result is always a transparent PNG, since PNG is the universal format that supports transparency.' },
+    { q: 'Does it work on people and products?', a: 'Yes. The model is general-purpose and handles people, products, and other objects. Very fine details like loose hair may not be perfect.' },
+  ],
+};

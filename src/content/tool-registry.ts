@@ -13,6 +13,7 @@ export const TOOL_REGISTRY: ToolEntry[] = [
   { slug: 'heic-to-pdf', href: '/heic-to-pdf', name: 'HEIC to PDF', shortName: 'HEIC→PDF', icon: '📄', blurb: 'Turn HEIC photos into PDF documents.' },
   { slug: 'resize-image', href: '/resize-image', name: 'Resize Image', shortName: 'Resize', icon: '📐', blurb: 'Change image dimensions — JPG, PNG, WebP & HEIC.' },
   { slug: 'compress-image', href: '/compress-image', name: 'Compress Image', shortName: 'Compress', icon: '🗜', blurb: 'Shrink JPG, PNG, WebP & HEIC file sizes.' },
+  { slug: 'remove-background', href: '/remove-background', name: 'Remove Background', shortName: 'Remove BG', icon: '🪄', blurb: 'Erase image backgrounds — JPG, PNG, WebP & HEIC.' },
 ];
 
 export function relatedTools(currentSlug: string): ToolEntry[] {
