@@ -8,14 +8,17 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview --port 4321",
+    "preview": "npm run build && wrangler dev",
     "astro": "astro",
     "test": "vitest run",
     "test:watch": "vitest",
     "e2e": "playwright test",
-    "sync-ort": "node scripts/copy-ort-wasm.mjs"
+    "sync-ort": "node scripts/copy-ort-wasm.mjs",
+    "generate-types": "wrangler types",
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^13.6.1",
     "@astrojs/preact": "^5.1.5",
     "@astrojs/sitemap": "^3.7.3",
     "astro": "^6.4.4",
@@ -33,6 +36,10 @@
     "@types/node": "^25.9.1",
     "tailwindcss": "^4.3.0",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.8"
+    "vitest": "^4.1.8",
+    "wrangler": "^4.98.0"
+  },
+  "overrides": {
+    "vite": "^7"
   }
 }

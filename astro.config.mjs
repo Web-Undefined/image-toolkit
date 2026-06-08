@@ -4,9 +4,12 @@ import preact from '@astrojs/preact';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
+import cloudflare from '@astrojs/cloudflare';
+
 export default defineConfig({
   site: 'https://freeheicconverter.com',
   integrations: [preact(), sitemap()],
+
   vite: {
     plugins: [
       tailwindcss(),
@@ -35,4 +38,6 @@ export default defineConfig({
       format: 'es',
     },
   },
+
+  adapter: cloudflare(),
 });
