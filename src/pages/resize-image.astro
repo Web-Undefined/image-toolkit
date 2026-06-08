@@ -4,9 +4,12 @@ import ResizeShell from '../components/ResizeShell.tsx';
 import Faq from '../components/Faq.astro';
 import RelatedTools from '../components/RelatedTools.astro';
 import AdSlot from '../components/AdSlot.astro';
+import ToolSchema from '../components/ToolSchema.astro';
 import { RESIZE_CONTENT as c } from '../content/tools';
 ---
 <BaseLayout title={c.title} description={c.description}>
+
+  <ToolSchema slug="resize-image" description={c.description} />
 
   {/* Hero */}
   <div class="relative text-center px-6 pt-12 pb-8 overflow-hidden">

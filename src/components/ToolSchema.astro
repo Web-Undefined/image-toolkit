@@ -1,0 +1,25 @@
+---
+// Emits WebApplication JSON-LD for a tool page so search engines can treat it
+// as a free, browser-based app (rich-result eligible). Name + URL come from the
+// tool registry so there's a single source of truth.
+import { TOOL_REGISTRY } from '../content/tool-registry';
+interface Props { slug: string; description: string; }
+const { slug, description } = Astro.props;
+const site = 'https://freeheicconverter.com';
+const entry = TOOL_REGISTRY.find((t) => t.slug === slug);
+const name = entry?.name ?? slug;
+const url = `${site}${entry?.href ?? `/${slug}`}`;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name,
+  url,
+  description,
+  applicationCategory: 'MultimediaApplication',
+  operatingSystem: 'Any (web browser)',
+  browserRequirements: 'Requires JavaScript',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  isAccessibleForFree: true,
+};
+---
+<script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />

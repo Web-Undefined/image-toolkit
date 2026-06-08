@@ -1,6 +1,21 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Faq from '../components/Faq.astro';
 import { TOOL_REGISTRY } from '../content/tool-registry';
+
+const steps = [
+  { n: '1', title: 'Drop your files', body: 'Drag in your photos or tap to choose them. Most tools handle a whole batch at once.' },
+  { n: '2', title: 'It runs on your device', body: 'Your browser does the work using WebAssembly — no server, no upload, no waiting in a queue.' },
+  { n: '3', title: 'Download your results', body: 'Save each file or grab them all as a zip. Nothing you converted is ever sent anywhere.' },
+];
+
+const faq = [
+  { q: 'Are my images really not uploaded?', a: 'Correct. Every tool runs entirely inside your browser using WebAssembly, so your photos never leave your device and are never sent to a server. You can even disconnect from the internet once a tool has loaded.' },
+  { q: 'Do these tools cost anything?', a: 'No. Every tool is completely free, with no account, sign-up, or watermark. The site is supported by unobtrusive ads.' },
+  { q: 'Which image formats are supported?', a: 'You can convert HEIC photos to JPG, PNG, or PDF, and compress or resize JPG, PNG, WebP, and HEIC images. More tools are added over time.' },
+  { q: 'Do I need to install anything?', a: 'No. Everything works in a normal web browser on Windows, macOS, Linux, iPhone, and Android — there is nothing to download or install.' },
+  { q: 'Is there a limit on how many files I can process?', a: 'You can process many files at once. Very large images (over 50 MB each) may be skipped to avoid running out of memory in the browser.' },
+];
 ---
 <BaseLayout
   title="Image Toolkit — Free Private Image Tools"
@@ -21,7 +36,7 @@ import { TOOL_REGISTRY } from '../content/tool-registry';
   </div>
 
   {/* Tool cards */}
-  <div class="max-w-3xl mx-auto px-6 pb-20 grid grid-cols-1 sm:grid-cols-3 gap-4">
+  <div class="max-w-3xl mx-auto px-6 pb-16 grid grid-cols-1 sm:grid-cols-3 gap-4">
     {TOOL_REGISTRY.map((tool) => (
       <a
         href={tool.href}
@@ -36,5 +51,32 @@ import { TOOL_REGISTRY } from '../content/tool-registry';
         <span class="inline-block mt-4 text-xs font-semibold text-violet-400 group-hover:text-violet-300">Open tool →</span>
       </a>
     ))}
+  </div>
+
+  {/* How it works */}
+  <div class="max-w-3xl mx-auto px-6 pb-16">
+    <h2 class="text-sm font-bold text-violet-400 uppercase tracking-wider mb-8 text-center">How it works</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+      {steps.map((step) => (
+        <div class="text-center">
+          <div class="w-10 h-10 mx-auto bg-violet-500/20 text-violet-300 font-bold rounded-xl flex items-center justify-center mb-3">{step.n}</div>
+          <h3 class="text-sm font-semibold text-slate-200 mb-1">{step.title}</h3>
+          <p class="text-sm text-slate-500 leading-relaxed">{step.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  {/* Why in-browser */}
+  <div class="max-w-2xl mx-auto px-6 pb-16 space-y-3">
+    <h2 class="text-sm font-bold text-violet-400 uppercase tracking-wider mb-4">Why private, in-browser image tools?</h2>
+    <p class="text-slate-500 text-sm leading-relaxed">Most free online image tools upload your photos to a server to do the work. That means your personal pictures — receipts, screenshots, family photos, ID documents — sit on a company's computer, even if only for a moment. For anything private, that is a real risk.</p>
+    <p class="text-slate-500 text-sm leading-relaxed">These tools take a different approach. Every conversion, compression, and resize runs entirely inside your own browser using WebAssembly, the same fast, low-level technology that powers in-browser games and editors. Your files are read directly from your device, processed in memory, and handed straight back to you. Nothing is ever uploaded, stored, or seen by anyone but you.</p>
+    <p class="text-slate-500 text-sm leading-relaxed">It is also faster and friendlier: there is no upload-and-wait, no queue, no account, and no watermark. Once a tool has loaded it even works offline. Free, private, and instant — the way simple image tools should be.</p>
+  </div>
+
+  {/* FAQ */}
+  <div class="max-w-2xl mx-auto px-6 pb-20">
+    <Faq faq={faq} />
   </div>
 </BaseLayout>

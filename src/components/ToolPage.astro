@@ -4,6 +4,7 @@ import ToolShell from './ToolShell.tsx';
 import Faq from './Faq.astro';
 import AdSlot from './AdSlot.astro';
 import RelatedTools from './RelatedTools.astro';
+import ToolSchema from './ToolSchema.astro';
 import type { ToolContent } from '../content/tools';
 interface Props { tool: ToolContent; }
 const { tool } = Astro.props;
@@ -15,6 +16,8 @@ const tabs = [
 ] as const;
 ---
 <BaseLayout title={tool.title} description={tool.description}>
+
+  <ToolSchema slug={tool.slug} description={tool.description} />
 
   {/* Hero */}
   <div class="relative text-center px-6 pt-12 pb-8 overflow-hidden">

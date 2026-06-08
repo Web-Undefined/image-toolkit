@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Cross-tool discovery</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #0d0b1e;
+    color: #e2e0f0;
+    padding: 24px 16px 60px;
+  }
+  h1 { font-size: 20px; text-align: center; margin-bottom: 6px;
+    background: linear-gradient(135deg,#ede9fe,#a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .sub { text-align: center; color: #94a3b8; font-size: 13px; margin-bottom: 28px; }
+  .opt { max-width: 720px; margin: 0 auto 22px; border: 1px solid rgba(139,92,246,0.25); border-radius: 14px; overflow: hidden; cursor: pointer; transition: border-color .15s, transform .15s; background: rgba(255,255,255,0.02); }
+  .opt:hover { border-color: rgba(167,139,250,0.7); transform: translateY(-2px); }
+  .opt.sel { border-color: #a78bfa; box-shadow: 0 0 0 2px rgba(167,139,250,0.4); }
+  .opt-head { display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: rgba(139,92,246,0.08); border-bottom: 1px solid rgba(139,92,246,0.15); }
+  .letter { width: 24px; height: 24px; border-radius: 6px; background: linear-gradient(135deg,#7c3aed,#9333ea); color: #fff; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  .opt-head h3 { font-size: 14px; font-weight: 600; }
+  .opt-head .rec { margin-left: auto; font-size: 10px; background: rgba(34,197,94,0.15); color: #86efac; padding: 2px 8px; border-radius: 10px; border: 1px solid rgba(34,197,94,0.3); }
+  .opt-body { padding: 16px; }
+  .opt-desc { font-size: 12px; color: #94a3b8; line-height: 1.6; margin-bottom: 14px; }
+
+  /* mini site chrome */
+  .frame { background: #0a0817; border: 1px solid rgba(139,92,246,0.2); border-radius: 8px; overflow: hidden; }
+  .bar { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; border-bottom: 1px solid rgba(139,92,246,0.15); }
+  .brand { font-size: 11px; font-weight: 700; color: #c4b5fd; }
+  .navlinks { display: flex; gap: 10px; align-items: center; }
+  .navlinks span { font-size: 10px; color: #94a3b8; }
+  .pill { font-size: 9px; color: #c4b5fd; border: 1px solid rgba(139,92,246,0.4); border-radius: 10px; padding: 2px 7px; }
+  .pill.on { background: linear-gradient(135deg,#7c3aed,#9333ea); color: #fff; border-color: transparent; }
+  .dropdown { font-size: 10px; color: #c4b5fd; border: 1px solid rgba(139,92,246,0.4); border-radius: 6px; padding: 3px 8px; }
+  .toolrow { display: flex; gap: 6px; padding: 8px 12px; flex-wrap: wrap; border-bottom: 1px solid rgba(139,92,246,0.12); background: rgba(139,92,246,0.04); }
+  .body-area { padding: 18px 12px; text-align: center; }
+  .body-area .h { font-size: 13px; color: #ede9fe; font-weight: 600; margin-bottom: 4px; }
+  .body-area .d { font-size: 10px; color: #64748b; }
+  .drop-panel { padding: 8px 12px; background: rgba(124,58,237,0.12); border-bottom: 1px solid rgba(139,92,246,0.2); display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+  .drop-panel .item { font-size: 10px; color: #c4b5fd; padding: 4px 6px; background: rgba(255,255,255,0.03); border-radius: 4px; }
+  .related { padding: 14px 12px; border-top: 1px solid rgba(139,92,246,0.15); background: rgba(139,92,246,0.04); }
+  .related .rh { font-size: 10px; color: #a78bfa; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; font-weight: 700; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+  .card { background: rgba(255,255,255,0.04); border: 1px solid rgba(139,92,246,0.2); border-radius: 6px; padding: 8px; }
+  .card .ci { font-size: 14px; margin-bottom: 3px; }
+  .card .ct { font-size: 9px; color: #e2e8f0; font-weight: 600; }
+</style>
+</head>
+<body>
+<h1>How should the tools cross-promote each other?</h1>
+<p class="sub">Goal: someone landing on ANY tool discovers the others. Click the one you prefer.</p>
+
+<!-- Option A -->
+<div class="opt" onclick="pick(this,'A')">
+  <div class="opt-head"><span class="letter">A</span><h3>"All Tools" dropdown in the header</h3></div>
+  <div class="opt-body">
+    <p class="opt-desc">A compact menu in the top nav, on every page. Always one click from any tool. Minimal screen space, but discovery depends on users opening the menu.</p>
+    <div class="frame">
+      <div class="bar">
+        <span class="brand">⬡ Image Toolkit</span>
+        <div class="navlinks"><span class="dropdown">All Tools ▾</span><span>About</span></div>
+      </div>
+      <div class="drop-panel">
+        <span class="item">🗜 Compress Image</span><span class="item">🖼 HEIC→JPG</span>
+        <span class="item">🎨 HEIC→PNG</span><span class="item">📄 HEIC→PDF</span>
+      </div>
+      <div class="body-area"><div class="h">Compress Image</div><div class="d">tool here</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Option B -->
+<div class="opt" onclick="pick(this,'B')">
+  <div class="opt-head"><span class="letter">B</span><h3>"Related tools" card grid at the bottom of every page</h3></div>
+  <div class="opt-body">
+    <p class="opt-desc">A grid of the other tools below the content/FAQ. Strong for SEO (lots of crawlable internal links with descriptive anchor text) and users naturally scroll into it. Takes vertical space.</p>
+    <div class="frame">
+      <div class="bar"><span class="brand">⬡ Image Toolkit</span><div class="navlinks"><span>About</span><span>Privacy</span></div></div>
+      <div class="body-area"><div class="h">Compress Image</div><div class="d">tool + content + FAQ</div></div>
+      <div class="related">
+        <div class="rh">More free tools</div>
+        <div class="cards">
+          <div class="card"><div class="ci">🖼</div><div class="ct">HEIC to JPG</div></div>
+          <div class="card"><div class="ci">🎨</div><div class="ct">HEIC to PNG</div></div>
+          <div class="card"><div class="ci">📄</div><div class="ct">HEIC to PDF</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Option C -->
+<div class="opt sel" onclick="pick(this,'C')">
+  <div class="opt-head"><span class="letter">C</span><h3>Both: header menu + bottom related-tools grid</h3><span class="rec">Recommended</span></div>
+  <div class="opt-body">
+    <p class="opt-desc">Header dropdown for quick access AND a bottom card grid for SEO + scroll discovery. Maximum internal linking (best for Google), tools surfaced both at-a-glance and in-depth. This is what every successful tool network does (iLovePDF, TinyWow, etc.).</p>
+    <div class="frame">
+      <div class="bar">
+        <span class="brand">⬡ Image Toolkit</span>
+        <div class="navlinks"><span class="dropdown">All Tools ▾</span><span>About</span></div>
+      </div>
+      <div class="body-area"><div class="h">Compress Image</div><div class="d">tool + content + FAQ</div></div>
+      <div class="related">
+        <div class="rh">More free tools</div>
+        <div class="cards">
+          <div class="card"><div class="ci">🖼</div><div class="ct">HEIC to JPG</div></div>
+          <div class="card"><div class="ci">🎨</div><div class="ct">HEIC to PNG</div></div>
+          <div class="card"><div class="ci">📄</div><div class="ct">HEIC to PDF</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function pick(el, choice) {
+    document.querySelectorAll('.opt').forEach(o => o.classList.remove('sel'));
+    el.classList.add('sel');
+    if (window.__select) window.__select(choice);
+    fetch('/__select', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({choice, text: 'Option '+choice})}).catch(()=>{});
+  }
+</script>
+</body>
+</html>
