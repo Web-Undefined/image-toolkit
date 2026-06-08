@@ -22,3 +22,10 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# playwright
+test-results/
+playwright-report/
+
+# superpowers internal tooling (brainstorm/visual-companion state)
+.superpowers/
