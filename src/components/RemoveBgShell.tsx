@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'preact/hooks';
+import { useState, useCallback, useEffect } from 'preact/hooks';
 import type { BatchStatus } from '../types';
 import { removeBackgroundInWorker } from '../lib/client';
 import type { RemoveBgOutcome } from '../lib/client';
@@ -28,8 +28,24 @@ export default function RemoveBgShell() {
   const update = (id: string, patch: Partial<Item>) =>
     setItems((prev) => prev.map((it) => (it.id === id ? { ...it, ...patch } : it)));
 
+  // Revoke all object URLs when the component unmounts to prevent memory leaks.
+  useEffect(() => {
+    return () => {
+      setItems((prev) => {
+        prev.forEach((it) => { if (it.previewUrl) URL.revokeObjectURL(it.previewUrl); });
+        return prev;
+      });
+    };
+  }, []);
+
   const runRemoval = useCallback(async (id: string, file: File) => {
-    update(id, { status: 'processing', result: undefined, error: undefined });
+    // Revoke any existing previewUrl for this item before re-processing.
+    setItems((prev) => {
+      const existing = prev.find((it) => it.id === id);
+      if (existing?.previewUrl) URL.revokeObjectURL(existing.previewUrl);
+      return prev;
+    });
+    update(id, { status: 'processing', result: undefined, previewUrl: undefined, error: undefined });
     try {
       const result = await removeBackgroundInWorker(id, file);
       update(id, { status: 'done', result, previewUrl: URL.createObjectURL(result.blob) });
