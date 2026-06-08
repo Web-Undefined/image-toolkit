@@ -29,3 +29,9 @@ playwright-report/
 
 # superpowers internal tooling (brainstorm/visual-companion state)
 .superpowers/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
